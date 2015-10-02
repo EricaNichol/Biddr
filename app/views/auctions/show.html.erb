@@ -1,0 +1,15 @@
+<%= @auction.title %>
+<%= @auction.description %>
+Current Price: <%= @auction.price %>
+
+<br>
+<%= simple_form_for [@auction, @bid] do |f| %>
+  <%= f.input :amount %>
+  <%= f.submit "bid" %>
+<% end %>
+<br>
+
+bids:
+<% @auction.bids.each do |bid| %>
+Bid Amount: <%= bid.amount %>
+<% end %>

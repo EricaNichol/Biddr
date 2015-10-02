@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
-  resources :auctions
+  resources :auctions do
+    resources :bids, only: [:new, :create]
+  end
 
   root 'auctions#index'
 end

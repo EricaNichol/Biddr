@@ -2,9 +2,11 @@ class AuctionsController < ApplicationController
 
   def new
     @auction = Auction.new
+    @bid     = Bid.new
   end
 
   def index
+    @auction = Auction.all
   end
 
   def create
@@ -15,6 +17,11 @@ class AuctionsController < ApplicationController
       render :new
       flash[:alert] = "Did not create"
     end
+  end
+
+  def show
+    @auction = Auction.find(params[:id])
+    @bid     = Bid.new
   end
 
   private
