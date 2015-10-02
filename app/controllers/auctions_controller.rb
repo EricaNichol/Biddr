@@ -13,6 +13,7 @@ class AuctionsController < ApplicationController
       redirect_to root_path, notice: "Sweet"
     else
       render :new
+      flash[:alert] = "Did not create"
     end
   end
 
