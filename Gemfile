@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+
 gem 'simple_form'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -39,7 +40,8 @@ group :development, :test do
   gem 'hirb'
   gem 'interactive_editor'
   gem 'awesome_print'
-  gem 'capybara'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+
   gem 'rspec-rails'
 
   # Access an IRB console on exception pages or by using <%= console %> in views

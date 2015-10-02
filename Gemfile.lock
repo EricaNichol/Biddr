@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/jnicklas/capybara.git
+  revision: 91e09a793d596457ebc6336f31a17624c5940a81
+  specs:
+    capybara (2.6.0.dev)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -43,12 +54,6 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (6.0.2)
-    capybara (2.5.0)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
     catpants (0.1.1)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -182,7 +187,7 @@ DEPENDENCIES
   awesome_print
   bcrypt (~> 3.1.7)
   byebug
-  capybara
+  capybara!
   catpants
   coffee-rails (~> 4.1.0)
   faker

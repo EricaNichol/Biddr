@@ -1,15 +1,32 @@
-<%= @auction.title %>
-<%= @auction.description %>
+<div>
+
+<div>
+<b>Title:</b> <%= @auction.title %>
+<br>
+<br>
+<b>Description:</b><%= @auction.description %>
+<br>
+<br>
 Current Price: <%= @auction.price %>
-
-<br>
-<%= simple_form_for [@auction, @bid] do |f| %>
-  <%= f.input :amount %>
-  <%= f.submit "bid" %>
-<% end %>
 <br>
 
-bids:
+</div>
+
+<div>
+  <h2>Bids</h2>
+  <%= simple_form_for [@auction, @bid] do |f| %>
+    <%= f.input :amount %>
+    <%= f.submit %>
+  <% end %>
+</div>
+
 <% @auction.bids.each do |bid| %>
-Bid Amount: <%= bid.amount %>
+<div id="bids">
+bids:
+<%= bid.amount %>
+User id:<%= bid.auction.user_id %>
+</div>
 <% end %>
+
+
+</div>

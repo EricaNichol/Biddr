@@ -1,16 +1,19 @@
 class AuctionsController < ApplicationController
+before_action :authenticate_user!, except: [:show, :index]
+
 
   def new
     @auction = Auction.new
-    @bid     = Bid.new
   end
+
 
   def index
     @auction = Auction.all
   end
 
   def create
-    @auction = Auction.new (auction_params)
+    @auction      = Auction.new(auction_params)
+    @auction.user = current_user
     if @auction.save
       redirect_to root_path, notice: "Sweet"
     else
