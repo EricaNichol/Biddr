@@ -22,7 +22,7 @@ RSpec.describe AuctionsController, type: :controller do
         {
           title:              "adfb",
           description:        "Stuff",
-          price:              12,
+          price:              10,
           end_date:           12/12/16,
         }
       end
