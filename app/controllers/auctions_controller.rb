@@ -10,7 +10,7 @@ class AuctionsController < ApplicationController
   def create
     @auction = Auction.new (auction_params)
     if @auction.save
-      render nothing: true
+      redirect_to root_path, notice: "Sweet"
     else
       render :new
     end
