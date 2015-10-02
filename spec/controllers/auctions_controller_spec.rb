@@ -63,6 +63,16 @@ RSpec.describe AuctionsController, type: :controller do
       it "doesn't create a record in the database" do
         expect { invalid_request }.not_to change { Auction.count }
       end
+
+      it "render the new template" do
+        invalid_request
+        expect(response).to render_template(:new)
+      end
+
+      it "sets a flash message" do
+        invalid_request
+        expect(flash[:alert]).to be
+      end
     end
   end
 
