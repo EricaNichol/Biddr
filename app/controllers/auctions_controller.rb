@@ -14,11 +14,17 @@ before_action :authenticate_user!, except: [:show, :index]
   def create
     @auction      = Auction.new(auction_params)
     @auction.user = current_user
-    if @auction.save
-      redirect_to root_path, notice: "Sweet"
-    else
-      render :new
-      flash[:alert] = "Did not create"
+    respond_to do |format|
+      if @auction.save
+        format.html { redirect_to root_path, notice: "Sweet" }
+        format.json { render :create_success }
+      else
+        format.html do
+          render :new
+          flash[:alert] = "Did not create"
+      end
+        format.js { render :create_failure }
+      end
     end
   end
 
