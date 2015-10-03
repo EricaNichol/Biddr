@@ -11,7 +11,7 @@ end
   describe "Validations" do
     it "requires a price" do
       bid = Bid.new bid_attributes
-      expect(bid).to be_invalid
+      expect(bid).to be_valid
     end
   end
 end

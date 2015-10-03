@@ -11,24 +11,31 @@ Current Price: <%= @auction.price %>
 <br>
 
 AASM STATE: <%= @auction.aasm_state %>
+</div>
 
+
+<div>
+<div id="current_bid">
+  Current Bid:
+</div>
 </div>
 
 <div>
   <h2>Bids</h2>
-  <%= simple_form_for [@auction, @bid] do |f| %>
+  <%= simple_form_for [@auction, @bid], remote: true do |f|  %>
     <%= f.input :amount %>
     <%= f.submit %>
   <% end %>
 </div>
 
-<% @auction.bids.each do |bid| %>
-<div id="bids">
-bids:
-<%= bid.amount %>
-User id:<%= bid.auction.user_id %>
+<div>
+
+
 </div>
+
+<h2>Bids</h2>
+<div id="bids">
+<% @auction.bids.each do |bid| %>
+   <%= render 'bids/bid', bid: bid %>
 <% end %>
-
-
 </div>

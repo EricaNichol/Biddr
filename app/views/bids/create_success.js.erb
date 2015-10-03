@@ -1,0 +1,5 @@
+$('#bids').append("<%= j render '/bids/bid', bid: @bid %>");
+
+<% @bid = Bid.new %>
+
+$('#bid_amount').val("");

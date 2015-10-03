@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :auctions do
-    resources :bids, only: [:new, :create]
+    resources :bids, only: [:new, :create, :destroy]
   end
 
   root 'auctions#index'

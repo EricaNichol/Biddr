@@ -5,12 +5,26 @@ class BidsController < ApplicationController
     @bid         = Bid.new(bid_params)
     @auction     = Auction.find params[:auction_id]
     @bid.auction = @auction
-    if @bid.save
-    redirect_to auction_path(@auction), notice: "good job"
-    else
-      render "/auctions/show"
+    respond_to do |format|
+      if @bid.save
+        format.html { redirect_to auction_path(@auction), notice: "good job" }
+        format.js { render :create_success }
+      else
+        render "/auctions/show"
+      end
     end
   end
+
+  def destroy
+    @bid        = Bid.find params[:id]
+    @auctions   = Auction.find params[:auction_id]
+    @bid.destroy
+    respond_to do |format|
+      format.html { redirect_to auction_path(@auction), notice: "deleted" }
+      format.js { render }
+    end
+  end
+
 
   private
 
