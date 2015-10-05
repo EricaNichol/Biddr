@@ -1,17 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe AuctionsController, type: :controller do
+  let(:user)          { FactoryGirl.create(:user)    }
 
   describe "#new" do
-    context "with valid parameters" do
-      it "instantiate a new auction model object" do
+    context "user not signed in" do
+      it "redirect to login page" do
+
         get :new
-        expect(assigns(:auction)).to be_a_new(Auction)
+        expect(response).to redirect_to new_session_path
+      end
+    end
+
+    context "user signed in" do
+      before do
+        login(user)
       end
 
-      it "renders the new template" do
+      it "renders the new auction template" do
         get :new
         expect(response).to render_template(:new)
+      end
+
+      it "instantiates a new auction object" do
+        get :new
+        expect(assigns(:auction)).to be_a_new(Auction)
       end
     end
 
