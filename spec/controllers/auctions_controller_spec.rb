@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe AuctionsController, type: :controller do
-  let(:user)          { FactoryGirl.create(:user)    }
+  let(:auction)   { FactoryGirl.create(:auction)    }
+  let(:user)      { FactoryGirl.create(:user)       }
 
   describe "#new" do
     context "user not signed in" do
@@ -13,80 +14,52 @@ RSpec.describe AuctionsController, type: :controller do
     end
 
     context "user signed in" do
-      before do
-        login(user)
-      end
+      let(:user)    { FactoryGirl.create(:user)       }
 
       it "renders the new auction template" do
+        session[:user_id] = user.id
         get :new
         expect(response).to render_template(:new)
       end
 
       it "instantiates a new auction object" do
+        session[:user_id] = user.id
         get :new
         expect(assigns(:auction)).to be_a_new(Auction)
       end
     end
 
   describe "#create" do
-    context "with valid parameters" do
-
-      def valid_params
-        {
-          title:              "adfb",
-          description:        "Stuff",
-          price:              10,
-          end_date:           12/12/16,
-        }
+    context "with not signed in" do
+      it "redirects to sign in page" do
+        post :create
+        expect(response).to redirect_to new_session_path
       end
+    end
 
-      def valid_request
-        post(:create, {auction: valid_params})
-      end
+    context "with user signed in" do
 
-      it "adds a auction record to the database" do
-        expect { valid_request }.to change { Auction.count }.by(1)
-      end
+      context "with valid parameters" do
+      let(:user)      { FactoryGirl.create(:user)     }
+      let(:auction)   { FactoryGirl.create(:auction)   }
+      #
+      # def valid_request
+      #   post :create, auction: attributes_for(:auction)
+      # end
 
-      it "redirects to the homepage" do
-        valid_request
-        expect(response).to redirect_to root_path
+      it "creates a campaign in the database" do
+        session[:user_id] = user.id
+        expect { :auction }.to change { Auction.count }.by(1)
       end
 
       it "sets a flash message" do
+        session[:user_id] = user.id
         valid_request
         expect(flash[:notice]).to be
       end
-    end
-
-    context "with invalid parameters" do
-      def invalid_params
-        {
-          title:          "",
-          description:    "",
-          price:           12,
-          end_date:         ""
-        }
-      end
-
-      def invalid_request
-        post(:create, {auction: invalid_params})
-      end
-
-      it "doesn't create a record in the database" do
-        expect { invalid_request }.not_to change { Auction.count }
-      end
-
-      it "render the new template" do
-        invalid_request
-        expect(response).to render_template(:new)
-      end
-
-      it "sets a flash message" do
-        invalid_request
-        expect(flash[:alert]).to be
       end
     end
+
   end
 
 end
