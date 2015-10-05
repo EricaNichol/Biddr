@@ -1,4 +1,4 @@
-$('#bids').append("<%= j render '/bids/bid', bid: @bid %>");
+$('#bids').append("<%= j render '/bids/bid', bid: @bid %>").children().first().hide().fadeIn();
 
 <% @bid = Bid.new %>
 
