@@ -7,11 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= link_to "HOME", root_path %> |
-<%= link_to "Sign-up", new_user_path %> |
-<%= link_to "Sign-IN", new_session_path %> |
-<%= link_to "Auction", new_auction_path %> |
-<%= link_to "SIGN OUT", sessions_path, method: :delete %> |
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="active"><%= link_to "HOME", root_path %></li>
+    <li role="presentation"><%= link_to "Sign-UP", new_user_path %></li>
+    <li role="presentation"><%= link_to "Sign-IN", new_session_path %></li>
+    <li role="presentation"><%= link_to "SIGN OUT", sessions_path, method: :delete %></li>
+    <li role="presentation"><%= link_to "Auction", new_auction_path %></li>
+  </ul>
+
+
+
+ 
 <div>
 
 <% if user_signed_in? %>

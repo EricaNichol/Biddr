@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-sass'
 gem 'stripe'
 gem 'aasm'
 gem 'simple_form'
